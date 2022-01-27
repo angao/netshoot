@@ -2,12 +2,14 @@ FROM debian:stable-slim as fetcher
 COPY build/fetch_binaries.sh /tmp/fetch_binaries.sh
 
 RUN apt-get update && apt-get install -y \
-  curl \
-  wget
+    curl \
+    wget
 
 RUN /tmp/fetch_binaries.sh
 
 FROM alpine:3.14
+
+LABEL maintainer="Angao <gawaine2111@gmail.com>"
 
 RUN set -ex \
     && echo "http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
